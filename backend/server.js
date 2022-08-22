@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 8000 // the the PORT variable from the .env fil
 // initialize app variable
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 // Create routes with express (Can be tested with postman)
 app.get('/', (req, res) => {
   res.status(200).json({ message : 'Welcome to the Support Desk API' })
