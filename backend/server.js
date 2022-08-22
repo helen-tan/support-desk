@@ -4,6 +4,11 @@ const express = require('express')
 const dotenv = require('dotenv').config() // With this, we can create a .env file in the root
 const { errorHandler } = require('./middleware/errorMiddleware')
 const PORT = process.env.PORT || 8000 // the the PORT variable from the .env file
+const colors = require('colors')
+const connectDB = require('./config/db')
+
+// Connect to mongoDB database
+connectDB()
 
 // initialize app variable
 const app = express()
