@@ -9,6 +9,11 @@ const initialState = {
   message: ''
 }
 
+// createAsyncThunk is a function so that we can use asynchronous data
+export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+  console.log(user)
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
