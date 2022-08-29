@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 
 // Routes (from routes folder)
 app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/tickets', require('./routes/ticketRoutes'))
 
 app.use(errorHandler)
 
