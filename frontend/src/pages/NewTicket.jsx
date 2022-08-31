@@ -9,7 +9,7 @@ import { BackButton } from '../components/BackButton'
 function NewTicket() {
   // Get the user from the global state
   const {user} = useSelector((state) => state.auth)
-  const { isLoading, isError, isSuccess, message } = useSelector((state) => state.ticket)
+  const { isLoading, isError, isSuccess, message } = useSelector((state) => state.tickets)
 
   // local state
   const [name] = useState(user.name)
