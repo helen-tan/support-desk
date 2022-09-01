@@ -6,6 +6,7 @@ const { errorHandler } = require('./middleware/errorMiddleware')
 const PORT = process.env.PORT || 8000 // the the PORT variable from the .env file
 const colors = require('colors')
 const connectDB = require('./config/db')
+const path = require('path')
 
 // Connect to mongoDB database
 connectDB()
@@ -17,13 +18,22 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // Create routes with express (Can be tested with postman)
-app.get('/', (req, res) => {
-  res.status(200).json({ message : 'Welcome to the Support Desk API' })
-})
 
 // Routes (from routes folder)
 app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/tickets', require('./routes/ticketRoutes'))
+
+// Serve frontend
+if (process.env.NODE_ENV === 'production') {
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+  app.get('*', (req, res) => res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html'))
+} else {
+  app.get('/', (req, res) => {
+    res.status(200).json({ message : 'Welcome to the Support Desk API' })
+  })
+}
 
 app.use(errorHandler)
 
